@@ -3,9 +3,11 @@ import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 
 public class PercolationStats {    
-    private int numTrials;
+    private final int numTrials;
     private int[] opened;
-    private int size;
+    private final int size;
+    private double mean;
+    private double stddev;
     
     
     public PercolationStats(int n, int trials) {
@@ -33,19 +35,21 @@ public class PercolationStats {
     }    
     
     public double mean() {
-        return StdStats.mean(opened)/size;
+        mean = StdStats.mean(opened)/size;
+        return mean;
     }
     
     public double stddev() {
-        return StdStats.stddev(opened)/size;
+        stddev = StdStats.stddev(opened)/size;
+        return stddev;
     }
     
     public double confidenceLo() {
-        return (mean() - (1.96*stddev()/Math.sqrt(numTrials)));
+        return (mean - (1.96*stddev/Math.sqrt(numTrials)));
     }
     
     public double confidenceHi() {
-        return (mean() + (1.96*stddev()/Math.sqrt(numTrials)));
+        return (mean + (1.96*stddev/Math.sqrt(numTrials)));
     }
     
     
