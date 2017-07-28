@@ -18,13 +18,11 @@ public class FastCollinearPoints {
         int N = points.length;
         lineSegments = new Stack<LineSegment>();
         uniquePoints = new Stack<Point[]>();
-        Point[] copy = new Point[N-1];
+        Point[] copy = new Point[N];
         for (int i = 0; i < N; i++) {
-            int k = 0;
-            for (int j = 0; j < N; j++) {
-                if (j == i) { continue; }
-                copy[k++] = points[j];
-            }
+            copy[i] = points[i];
+        }
+        for (int i = 0; i < N; i++) {            
             Arrays.sort(copy);
             Arrays.sort(copy, points[i].slopeOrder());
             findMaxSegments(points[i], copy);
